@@ -930,6 +930,10 @@
                                 <li><i class="fas fa-check text-green-400"></i> Cosmetic items</li>
                             </ul>
                             <button onclick="addToCart('Common Crate', 1.99)" class="btn-primary w-full">
+                                <button onclick="buyCrate('Krish2011raj11', 'Legendary')" class="btn-primary w-full">
+  <i class="fas fa-gift"></i> Buy Crate
+</button>
+
                                 <i class="fas fa-shopping-cart"></i> Add to Cart
                             </button>
                         </div>
@@ -2078,5 +2082,30 @@
             }
         }
     </script>
+    <script>
+function buyCrate(username, crateType) {
+  fetch("https://YOUR-REPLIT-URL-HERE.gladly.repl.co/givecrate", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      username: username,
+      crate: crateType
+    })
+  })
+  .then(response => {
+    if (!response.ok) throw new Error("Failed to send crate request");
+    return response.json();
+  })
+  .then(data => {
+    alert("🎁 Crate delivered successfully to " + username);
+  })
+  .catch(error => {
+    console.error("Error sending crate:", error);
+    alert("❌ Failed to deliver crate.");
+  });
+}
+</script>
 </body>
 </html>
